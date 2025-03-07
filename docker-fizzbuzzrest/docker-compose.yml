@@ -1,0 +1,22 @@
+services:
+  web-fizzbuzzrest:
+    image: php:8.3-apache
+    container_name: web-fizzbuzzrest
+    build: 'web-fizzbuzzrest/'
+    ports:
+      - "8080:80"
+    volumes:
+      - ../:/var/www/html
+      - ./web-fizzbuzzrest/php.ini:/usr/local/etc/php/php.ini
+      - ./web-fizzbuzzrest/.bashrc:/root/.bashrc
+      - ./web-fizzbuzzrest/.bash_history:/root/.bash_history
+      - ./web-fizzbuzzrest/log:/var/log/apache2
+      - ./web-fizzbuzzrest/000-default.conf:/etc/apache2/sites-enabled/000-default.conf
+      - ./web-fizzbuzzrest/docker-php-ext-xdebug.ini:/usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
+      - ./web-fizzbuzzrest/mpm_prefork.conf:/etc/apache2/mods-available/mpm_prefork.conf
+    environment:
+      XDEBUG_CONFIG: remote_host=host.docker.internal
+
+volumes:
+  var:
+  vendor:

@@ -1,3 +1,8 @@
+RewriteEngine On
+
+# Redirect the root URL to /statistics
+RewriteRule ^$ /statistics [R=301,L]
+
 # Use the front controller as index file. It serves as a fallback solution for 404 errors.
 DirectoryIndex index.php
 
